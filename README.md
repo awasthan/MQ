@@ -7,6 +7,7 @@ Give the CN value as appropriate
 
 # Step2: 
 Put the tls.key and tls.cert in same folder as that of Dockerfile. If you put them in other directory, make sure to update path of Dockerfile
+Also create mqsc file if you want to do some configurations. In this example, we are creating a channel and disable chalauth & connauth on queue manager. Look at config.mqsc file
 
 # Step3: 
 Build the docker image and push to OCP registry. Below is example of commands. Make sure to update as per your environment/tag/ocp registry url/namespace etc
@@ -23,3 +24,7 @@ Perform deployment, create service and route. Below is an example
 oc apply -f QM_Deployment.yaml
 oc expose deploy/qm2 --name=qm2 --port=1414 --type=ClusterIP
 oc expose svc/qm2
+
+# Step 6:
+To connect to the queue manager externally, follow the below blog to create the route for the channel and import tls.crt into the truststore of client.
+https://developer.ibm.com/integration/blog/2020/02/28/connecting-to-a-queue-manager-on-cloud-pak-for-integration/
