@@ -18,6 +18,8 @@ docker push default-route-openshift-image-registry.apps.myocp.os.fyre.ibm.com/mq
 Update Deployment yaml with the image url
 
 # Step 5:
-Perform deployment, create service and route
+Perform deployment, create service and route. Below is an example
 
-oc apply -f
+oc apply -f QM_Deployment.yaml
+oc expose deploy/qm2 --name=qm2 --port=1414 --type=ClusterIP
+oc expose svc/qm2
